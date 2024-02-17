@@ -3,6 +3,7 @@ import "./header.scss";
 import { CiLocationOn } from "react-icons/ci";
 import { IoSearchSharp } from "react-icons/io5";
 import { MdOutlineArrowDropDown } from "react-icons/md";
+import { Link } from "react-router-dom";
 import LowerHeader from "./LowerHeader";
 import cart from "../../assets/cart.png";
 function Header() {
@@ -10,12 +11,12 @@ function Header() {
     <>
       <section className="nav-main-container">
         <div className="nav-left">
-          <a href="/" className="logo">
+          <Link to="/" className="logo">
             <img
               src="https://pngimg.com/uploads/amazon/small/amazon_PNG11.png"
               alt="amazon logo"
             />
-          </a>
+          </Link>
           <div className="location">
             <CiLocationOn />
             <div className="loc-wrapper">

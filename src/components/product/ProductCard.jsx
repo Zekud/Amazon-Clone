@@ -17,7 +17,7 @@ function ProductCard({ data }) {
         <div className="price">
           <CurrencyFormatter amount={price} />
         </div>
-        <button style={{ display: "none" }}>Add to cart</button>
+        <button>Add to cart</button>
       </div>
     </div>
   );

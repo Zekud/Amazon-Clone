@@ -12,7 +12,7 @@ function Product() {
   }, []);
   return (
     <section className="product-container">
-      {product.map((item, index) => (
+      {product?.map((item, index) => (
         <ProductCard data={item} key={index} />
       ))}
     </section>

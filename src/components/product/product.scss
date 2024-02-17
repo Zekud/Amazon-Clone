@@ -2,24 +2,23 @@
 .product-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px;
   justify-content: center;
   padding: 20px;
   .product-card {
     display: flex;
     flex-direction: column;
     width: 250px;
-    height: 450px;
     padding: 10px;
+    position: relative;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
     &:hover button {
       display: block !important;
     }
     img {
       width: 100%;
       object-fit: contain;
-      max-height: 250px;
+      max-height: 200px;
       margin: 10px 0;
     }
     h2 {
@@ -27,6 +26,34 @@
       font-weight: 500;
       color: $header-background;
       margin: 10px 0;
+    }
+    .rating-container {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin: 10px 0;
+    }
+    .price {
+      font-size: 20px;
+      font-weight: 500;
+      color: $header-background;
+      margin: 5px 0 30px 0;
+    }
+    button {
+      display: none;
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      padding: 10px;
+      border: none;
+      width: 100%;
+      border-radius: 30px;
+      background-color: $search-background;
+      color: $header-background;
+      &:hover {
+        cursor: pointer;
+        background-color: #fa940e;
+      }
     }
   }
 }
