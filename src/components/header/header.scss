@@ -1,0 +1,249 @@
+@import "../../app.scss";
+.nav-main-container {
+  display: flex;
+  gap: 10px;
+  height: 60px;
+  background-color: $header-background;
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 20%;
+    height: 100%;
+    padding: 0 10px;
+    .logo {
+      width: 120px;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      &:hover {
+        outline: 1px solid $text-color;
+        cursor: pointer;
+      }
+      img {
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+    .location {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 8px;
+      color: $text-color;
+      &:hover {
+        outline: 1px solid $text-color;
+        cursor: pointer;
+      }
+      svg {
+        font-size: 25px;
+        font-weight: bold;
+      }
+      .loc-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        flex-direction: column;
+        p {
+          font-size: 12px;
+          font-weight: 500;
+          color: $select-color;
+          padding: 0;
+          margin: 0;
+        }
+        span {
+          font-size: 14px;
+          font-weight: bold;
+          padding: 0;
+          margin: 0;
+        }
+      }
+    }
+  }
+  .nav-fill {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    .nav-fill-wrapper {
+      flex: 1;
+      display: flex;
+      border-radius: 5px;
+      overflow: hidden;
+
+      select {
+        border: none;
+        outline: none;
+        background-color: #e8e6e6;
+        color: $gray-color;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 10px;
+        &:hover {
+          background-color: #d4d4d4;
+          cursor: pointer;
+        }
+        &:focus {
+          border: 3px solid $search-background;
+        }
+      }
+      input {
+        border: none;
+        outline: none;
+        background-color: $text-color;
+        color: $header-background;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 10px;
+        width: 100%;
+        &:focus {
+          border: 3px solid $search-background;
+        }
+      }
+      span {
+        padding: 10px;
+        background-color: #f5bb6e;
+        svg {
+          font-size: 20px;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: $search-background;
+        }
+      }
+    }
+  }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    width: 30%;
+    height: 100%;
+    .language {
+      display: flex;
+      align-items: center;
+      padding: 15px 3px;
+      gap: 5px;
+      color: $text-color;
+      background-color: $header-background;
+      &:hover {
+        cursor: pointer;
+        outline: 1px solid $text-color;
+      }
+      img {
+        width: 30px;
+        object-fit: cover;
+      }
+      .lang-wrapper {
+        display: flex;
+        svg {
+          color: $gray-color;
+        }
+      }
+    }
+    .sign-in-link {
+      display: flex;
+      justify-content: center;
+      gap: 2px;
+      color: $text-color;
+      flex-direction: column;
+      padding: 8px 3px;
+      &:hover {
+        cursor: pointer;
+        outline: 1px solid $text-color;
+      }
+      :first-child {
+        font-size: 12px;
+        font-weight: 500;
+      }
+      :nth-child(2) {
+        font-size: 14px;
+        font-weight: bold;
+      }
+    }
+    .orders-link {
+      display: flex;
+      justify-content: center;
+      gap: 2px;
+      color: $text-color;
+      flex-direction: column;
+      padding: 8px 10px;
+      &:hover {
+        cursor: pointer;
+        outline: 1px solid $text-color;
+      }
+      :first-child {
+        font-size: 12px;
+        font-weight: 500;
+      }
+      :nth-child(2) {
+        font-size: 14px;
+        font-weight: bold;
+      }
+    }
+    .cart {
+      display: flex;
+      justify-content: center;
+      align-items: end;
+      gap: 2px;
+      color: $text-color;
+      padding: 1px 5px;
+      &:hover {
+        cursor: pointer;
+        outline: 1px solid $text-color;
+      }
+      .cart-wrapper {
+        position: relative;
+        img {
+          width: 50px;
+          object-fit: cover;
+        }
+        span {
+          position: absolute;
+          left: 28px;
+          top: -3px;
+          color: $search-background;
+          font-weight: bold;
+          font-size: 12px;
+        }
+      }
+      :nth-child(2) {
+        font-size: 15px;
+        font-weight: bold;
+        padding: 10px 0px;
+        color: $text-color;
+      }
+    }
+  }
+}
+.lower-header-wrapper {
+  width: 100%;
+  height: 40px;
+  background-color: $second-header-background;
+  ul {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 10px;
+    :first-child {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: bold;
+    }
+    li {
+      list-style: none;
+      padding: 0 10px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      color: $text-color;
+      &:hover {
+        cursor: pointer;
+        outline: 1px solid $text-color;
+      }
+    }
+  }
+}

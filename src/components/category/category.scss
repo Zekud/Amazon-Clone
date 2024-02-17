@@ -1,0 +1,42 @@
+@import "../../app.scss";
+
+.category {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  position: relative;
+  margin: -20px 0 10px 0;
+  padding: 0 20px;
+
+  .category-card {
+    width: 350px;
+    height: 350px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    &:hover {
+      cursor: pointer;
+    }
+    h2 {
+      font-size: 25px;
+      font-weight: 500;
+      color: $header-background;
+    }
+    img {
+      width: 100%;
+      object-fit: contain;
+      max-height: 250px;
+      margin: 10px 0;
+    }
+    p {
+      color: lightblue !important;
+      font-weight: 500;
+      font-size: 15px;
+      &:hover {
+        cursor: pointer;
+        color: rgb(139, 203, 224) !important;
+      }
+    }
+  }
+}

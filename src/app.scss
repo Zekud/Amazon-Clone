@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Amazon Ember", Arial, Helvetica, sans-serif;
+}
+@mixin mobile {
+  @media screen and (max-width: 480px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+@mixin laptop {
+  @media screen and (max-width: 1200px) {
+    @content;
+  }
+}
+$header-background: #131921;
+$text-color: #fff;
+$gray-color: #7e7f84;
+$select-color: #d4d4d4;
+$search-background: #f3a847;
+$second-header-background: #232f3e;
+$footer-upper-background: #485769;
+$footer-middle-background: #232f3e;
+$footer-lower-background: #131a22;
+a {
+  text-decoration: none;
+}
