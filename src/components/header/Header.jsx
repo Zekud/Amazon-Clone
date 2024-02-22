@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./header.scss";
 import { CiLocationOn } from "react-icons/ci";
 import { IoSearchSharp } from "react-icons/io5";
@@ -6,9 +6,14 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 import { Link } from "react-router-dom";
 import LowerHeader from "./LowerHeader";
 import cart from "../../assets/cart.png";
+import { cartContext } from "../ContextAPI/CartContext";
+
 function Header() {
+  const { state } = useContext(cartContext);
+  const totalItems = state.basket.reduce((acc, item) => acc + item.quantity, 0);
+
   return (
-    <>
+    <section className="whole-header">
       <section className="nav-main-container">
         <div className="nav-left">
           <Link to="/" className="logo">
@@ -55,19 +60,19 @@ function Header() {
             <span>Returns</span>
             <span>& Orders</span>
           </a>
-          <a href="#" className="cart">
+          <Link to="/cart" className="cart">
             <div className="cart-wrapper">
               <img src={cart} alt="cart" />
-              <span>0</span>
+              <span>{totalItems}</span>
             </div>
             <span>Cart</span>
-          </a>
+          </Link>
         </div>
       </section>
       <section>
         <LowerHeader />
       </section>
-    </>
+    </section>
   );
 }
 
