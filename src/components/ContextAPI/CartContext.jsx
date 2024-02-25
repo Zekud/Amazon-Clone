@@ -5,6 +5,7 @@ export const cartContext = createContext();
 function CartContext({ children }) {
   const initialState = {
     basket: [],
+    user: null,
   };
   const reducer = (state, action) => {
     switch (action.type) {
@@ -38,6 +39,8 @@ function CartContext({ children }) {
             )
             .filter((item) => item.quantity !== 0),
         };
+      case "Set_User":
+        return { ...state, user: action.user };
       default:
         return state;
     }

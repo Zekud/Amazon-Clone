@@ -1,0 +1,73 @@
+@import "../../app.scss";
+.auth-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  img {
+    width: 100px;
+    margin: 15px auto;
+  }
+  .signin-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    h1 {
+      margin: 10px 0;
+    }
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      input {
+        padding: 10px;
+        border: 1px solid lightgray;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        width: 100%;
+        &:focus {
+          outline: 1px solid lightblue !important;
+        }
+      }
+      label {
+        font-weight: 500;
+        font-size: 14px;
+      }
+    }
+    .signin {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      width: 100%;
+      background-color: orange !important;
+      color: $header-background;
+      cursor: pointer;
+      &:hover {
+        background-color: $search-background !important;
+      }
+      p {
+        font-size: 14px;
+        margin: 10px 0;
+      }
+    }
+    .create-account {
+      padding: 10px;
+      border-radius: 5px;
+      width: 100%;
+      border: none;
+      background-color: rgb(227, 225, 225);
+      color: $header-background;
+      cursor: pointer;
+      &:hover {
+        background-color: rgba(232, 225, 225, 0.5);
+      }
+    }
+  }
+}

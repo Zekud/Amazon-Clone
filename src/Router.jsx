@@ -4,7 +4,7 @@ import Landing from "./pages/landing/Landing";
 import Cart from "./pages/cart/Cart";
 import Orders from "./pages/orders/Orders";
 import Payment from "./pages/payment/Payment";
-import SignIn from "./pages/Auth/SignIn";
+import Auth from "./pages/Auth/Auth";
 import Results from "./pages/results/Results";
 import ProductDetail from "./pages/productdetails/ProductDetail";
 function Routing() {
@@ -17,7 +17,7 @@ function Routing() {
         <Route path="/payment" element={<Payment />} />
         <Route path="/category/:category" element={<Results />} />
         <Route path="/product/:id" element={<ProductDetail />} />
-        <Route path="/auth" element={<SignIn />} />
+        <Route path="/auth" element={<Auth />} />
       </Routes>
     </Router>
   );
