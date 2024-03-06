@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import LowerHeader from "./LowerHeader";
 import cart from "../../assets/cart.png";
 import { cartContext } from "../ContextAPI/CartContext";
+import { signOut } from "firebase/auth";
+import { auth } from "../../Utilities/FirebaseConfig";
 
 function Header() {
   const { state } = useContext(cartContext);
@@ -52,10 +54,19 @@ function Header() {
               <MdOutlineArrowDropDown />
             </div>
           </a>
-          <a href="#" className="sign-in-link">
-            <span>Hello, Sign in</span>
-            <span>Account & Lists</span>
-          </a>
+          <Link to={!state.user && "/auth"} className="sign-in-link">
+            {state.user ? (
+              <>
+                <span>Hello, {state.user?.email.split("@")[0]}</span>
+                <span onClick={() => signOut(auth)}>Sign Out</span>
+              </>
+            ) : (
+              <>
+                <span>Hello, Sign in</span>
+                <p>Account & Lists</p>
+              </>
+            )}
+          </Link>
           <a href="#" className="orders-link">
             <span>Returns</span>
             <span>& Orders</span>

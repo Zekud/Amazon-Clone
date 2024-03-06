@@ -1,42 +1,61 @@
 import React, { useState, useContext } from "react";
 import "./auth.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../Utilities/FirebaseConfig";
 import { cartContext } from "../../components/ContextAPI/CartContext";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState({
+    signin: false,
+    signUp: false,
+  });
   const { dispatch } = useContext(cartContext);
+
+  const navigate = useNavigate();
   async function handleSubmit(e) {
     e.preventDefault();
+    setError("");
+    setLoading({ ...loading, signin: false, signUp: false });
     if (email !== "" && password !== "") {
       if (e.target.name === "signin") {
+        setLoading({ ...loading, signin: true });
         try {
-          const userCredential = await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-          );
-          dispatch({ type: "Set_User", user: userCredential.user });
+          await signInWithEmailAndPassword(auth, email, password);
+          //dispatch({ type: "Set_User", user: userCredential.user });
+          setLoading({ ...loading, signin: false });
+          navigate("/");
         } catch (error) {
-          setError(error.message);
+          setError("Incorrect Email or Password");
+          setLoading({ ...loading, signin: false });
         }
       } else if (e.target.name === "create-account") {
+        setLoading({ ...loading, signUp: true });
         try {
-          const userCredential = await createUserWithEmailAndPassword(
-            auth,
-            email,
-            password
-          );
-          dispatch({ type: "Set_User", user: userCredential.user });
+          await createUserWithEmailAndPassword(auth, email, password);
+          //dispatch({ type: "Set_User", user: userCredential.user });
+          setLoading({ ...loading, signUp: false });
+          navigate("/");
         } catch (error) {
-          setError(error.message);
+          if (
+            error.message === "Firebase: Error (auth/email-already-in-use)."
+          ) {
+            setError("Email Already in Use");
+          } else if (
+            error.message === "Firebase: Error (auth/invalid-email)."
+          ) {
+            setError("Invalid Email");
+          } else {
+            setError("Something went wrong");
+          }
+          setLoading({ ...loading, signUp: false });
         }
       }
     } else {
@@ -78,7 +97,11 @@ function Auth() {
             name="signin"
             className="signin"
           >
-            Sign In
+            {loading.signin ? (
+              <ClipLoader color="white" size={20} />
+            ) : (
+              "Sign In"
+            )}
           </button>
         </form>
         <p>
@@ -90,8 +113,13 @@ function Auth() {
           name="create-account"
           className="create-account"
         >
-          Create your Amazon Account
+          {loading.signUp ? (
+            <ClipLoader color="white" size={20} />
+          ) : (
+            "Create your Amazon Account"
+          )}
         </button>
+        {error && <p className="error">{error}</p>}
       </div>
     </section>
   );
