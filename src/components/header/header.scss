@@ -4,11 +4,13 @@
   top: 0;
   left: 0;
   z-index: 999;
+  width: 100%;
   .nav-main-container {
     display: flex;
     gap: 10px;
     height: 60px;
     background-color: $header-background;
+    width: 100%;
 
     .nav-left {
       display: flex;
