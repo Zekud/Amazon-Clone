@@ -5,9 +5,16 @@ import ProductCard from "../../components/product/ProductCard";
 import "./payment.scss";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import CurrencyFormatter from "../../components/currencyFormater/CurrencyFormatter";
+
+import ClipLoader from "react-spinners/ClipLoader";
+import { db } from "../../Utilities/FirebaseConfig";
+import { setDoc, doc } from "firebase/firestore";
 function Payment() {
+  const stripe = useStripe();
+  const elements = useElements();
   const [CardError, setCardError] = useState(null);
   const { state } = useContext(cartContext);
+  const [processing, setProcessing] = useState(false);
   const total = state.basket?.reduce((acc, item) => acc + item.quantity, 0);
   const totalPrice = state.basket?.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -16,6 +23,62 @@ function Payment() {
 
   const handleCardChange = (event) => {
     setCardError(event.error ? event.error.message : "");
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setProcessing(true);
+
+    try {
+      await fetch(
+        `http://localhost:5000/payment/create?total=${totalPrice * 100}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((res) => res.json())
+        .then(async (data) => {
+          const confirmation = stripe.confirmCardPayment(data.clientSecret, {
+            payment_method: {
+              card: elements.getElement(CardElement),
+            },
+          });
+
+          await confirmation.then((result) => {
+            if (result.error) {
+              setCardError(result.error.message);
+            } else {
+              setDoc(
+                doc(
+                  db,
+                  "users",
+                  state.user?.uid,
+                  "orders",
+                  result.paymentIntent.id
+                ),
+                {
+                  basket: state.basket,
+                  amount: result.paymentIntent.amount,
+                  created: result.paymentIntent.created,
+                }
+              );
+              console.log("success");
+              state.basket = [];
+            }
+          });
+        });
+
+      setProcessing(false);
+    } catch (err) {
+      console.error(err);
+      if (totalPrice === 0) {
+        setCardError("there is no item in the cart");
+      }
+      setProcessing(false);
+    }
   };
   return (
     <Layout>
@@ -43,7 +106,7 @@ function Payment() {
         <div className="payment">
           <h3>Payment Method</h3>
           <div className="payment-container">
-            <form action="">
+            <form onSubmit={handleSubmit}>
               {CardError && <small style={{ color: "red" }}>{CardError}</small>}
               <CardElement onChange={handleCardChange} />
               <div>
@@ -51,7 +114,13 @@ function Payment() {
                   Total Price: <CurrencyFormatter amount={totalPrice} />
                 </p>
               </div>
-              <button>Pay now</button>
+              <button type="submit" disabled={processing || !stripe}>
+                {processing ? (
+                  <ClipLoader color="#36d7b7" size={12} />
+                ) : (
+                  "Pay Now"
+                )}
+              </button>
             </form>
           </div>
         </div>
