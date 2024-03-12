@@ -67,10 +67,10 @@ function Header() {
               </>
             )}
           </Link>
-          <a href="#" className="orders-link">
+          <Link to="/orders" className="orders-link">
             <span>Returns</span>
             <span>& Orders</span>
-          </a>
+          </Link>
           <Link to="/cart" className="cart">
             <div className="cart-wrapper">
               <img src={cart} alt="cart" />

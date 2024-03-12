@@ -5,15 +5,16 @@ import ProductCard from "../../components/product/ProductCard";
 import "./payment.scss";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import CurrencyFormatter from "../../components/currencyFormater/CurrencyFormatter";
-
+import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import { db } from "../../Utilities/FirebaseConfig";
 import { setDoc, doc } from "firebase/firestore";
 function Payment() {
+  const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
   const [CardError, setCardError] = useState(null);
-  const { state } = useContext(cartContext);
+  const { state, dispatch } = useContext(cartContext);
   const [processing, setProcessing] = useState(false);
   const total = state.basket?.reduce((acc, item) => acc + item.quantity, 0);
   const totalPrice = state.basket?.reduce(
@@ -66,16 +67,19 @@ function Payment() {
                 }
               );
               console.log("success");
-              state.basket = [];
+              dispatch({ type: "CLEAR_BASKET" });
             }
           });
         });
 
       setProcessing(false);
+      navigate("/orders");
     } catch (err) {
       console.error(err);
       if (totalPrice === 0) {
         setCardError("there is no item in the cart");
+      } else {
+        setCardError("something went wrong");
       }
       setProcessing(false);
     }

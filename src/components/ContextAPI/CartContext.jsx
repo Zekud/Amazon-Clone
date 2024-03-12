@@ -41,6 +41,11 @@ function CartContext({ children }) {
         };
       case "Set_User":
         return { ...state, user: action.user };
+      case "CLEAR_BASKET":
+        return {
+          ...state,
+          basket: [],
+        };
       default:
         return state;
     }

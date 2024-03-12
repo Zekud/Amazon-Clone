@@ -1,8 +1,7 @@
 import React, { useState, useContext } from "react";
 import "./auth.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { auth } from "../../Utilities/FirebaseConfig";
-import { cartContext } from "../../components/ContextAPI/CartContext";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -10,6 +9,7 @@ import {
 import ClipLoader from "react-spinners/ClipLoader";
 
 function Auth() {
+  const { state } = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -17,8 +17,6 @@ function Auth() {
     signin: false,
     signUp: false,
   });
-  const { dispatch } = useContext(cartContext);
-
   const navigate = useNavigate();
   async function handleSubmit(e) {
     e.preventDefault();
@@ -31,7 +29,7 @@ function Auth() {
           await signInWithEmailAndPassword(auth, email, password);
           //dispatch({ type: "Set_User", user: userCredential.user });
           setLoading({ ...loading, signin: false });
-          navigate("/");
+          navigate(state?.redirect ? state.redirect : "/");
         } catch (error) {
           setError("Incorrect Email or Password");
           setLoading({ ...loading, signin: false });
@@ -42,7 +40,7 @@ function Auth() {
           await createUserWithEmailAndPassword(auth, email, password);
           //dispatch({ type: "Set_User", user: userCredential.user });
           setLoading({ ...loading, signUp: false });
-          navigate("/");
+          navigate(state?.redirect ? state.redirect : "/");
         } catch (error) {
           if (
             error.message === "Firebase: Error (auth/email-already-in-use)."
@@ -72,6 +70,9 @@ function Auth() {
       </Link>
       <div className="signin-container">
         <h1>Sign In</h1>
+        <div style={{ color: "red", textAlign: "center" }}>
+          {state?.msg ? state.msg : ""}
+        </div>
         <form action="">
           <div className="email">
             <label htmlFor="email">Email</label>
