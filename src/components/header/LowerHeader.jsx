@@ -3,10 +3,12 @@ import { IoMenu } from "react-icons/io5";
 function LowerHeader() {
   return (
     <div className="lower-header-wrapper">
-      <ul>
+      <ul className="lower-header-container">
         <li>
-          <IoMenu />
-          <span>All</span>
+          <div>
+            <IoMenu />
+            <span>All</span>
+          </div>
         </li>
         <li>Today's Deals</li>
         <li>Customer Service</li>

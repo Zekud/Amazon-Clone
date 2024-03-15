@@ -34,7 +34,10 @@ function Orders() {
             {orders?.map((order) => {
               return (
                 <div key={order.id} className="order">
-                  <h3>Order Id: {order.id}</h3>
+                  <div className="order_id_container">
+                    <h3>Order Id:</h3>
+                    <h4 className="order_id">{order.id}</h4>
+                  </div>
                   <div>
                     {order.data.basket?.map((item, index) => {
                       return <ProductCard data={item} key={index} />;
