@@ -32,7 +32,9 @@ function Payment() {
 
     try {
       await fetch(
-        `http://localhost:5000/payment/create?total=${totalPrice * 100}`,
+        `https://amazon-api-deploy-esqf.onrender.com/payment/create?total=${
+          totalPrice * 100
+        }`,
         {
           method: "POST",
           headers: {
