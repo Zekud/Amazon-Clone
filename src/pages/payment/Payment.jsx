@@ -32,7 +32,7 @@ function Payment() {
 
     try {
       await fetch(
-        `https://amazon-api-deploy-esqf.onrender.com/payment/create?total=${
+        `${process.env.BACKEND_PREFIX}/payment/create?total=${
           totalPrice * 100
         }`,
         {
