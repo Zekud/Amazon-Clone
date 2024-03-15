@@ -3,12 +3,12 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY, // remove the template literals and the $
   authDomain: "e-clone-31670.firebaseapp.com",
   projectId: "e-clone-31670",
   storageBucket: "e-clone-31670.appspot.com",
   messagingSenderId: "837141500210",
-  appId: process.env.FIREBASE_APP_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID, // remove the template literals
 };
 
 // Initialize Firebase

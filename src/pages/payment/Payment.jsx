@@ -32,7 +32,7 @@ function Payment() {
 
     try {
       await fetch(
-        `${process.env.BACKEND_PREFIX}/payment/create?total=${
+        `${process.env.REACT_APP_BACKEND_PREFIX}/payment/create?total=${
           totalPrice * 100
         }`,
         {
